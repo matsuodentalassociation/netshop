@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>synchrowave01 for 有田歯科医院 - Ver.19</title>
+<style>
+   /* 基本スタイル */
+    body {
+        margin: 0;
+        font-family: 'Helvetica Neue', 'Helvetica', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
+        line-height: 1.8;
+        color: #333;
+        background-color: #f4f7f9;
+    }
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    h1, h2, h3, h4 {
+        font-weight: 600;
+        line-height: 1.4;
+        color: #1a2b48;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .section {
+        padding: 60px 20px;
+    }
+    .text-center {
+        text-align: center;
+    }
+
+    /* ヒーローセクション */
+    .hero-split-container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        background-color: #fff;
+    }
+    .hero-left {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5vw;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .hero-left .logo {
+        max-width: 450px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-left h1 {
+        font-size: 2.4rem;
+        margin-bottom: 20px;
+    }
+    .hero-left p {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+    .cta-button {
+        display: inline-block;
+        background-color: #005A9C;
+        color: white;
+        padding: 18px 50px;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: bold;
+        border-radius: 50px;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(0, 90, 156, 0.2);
+    }
+    .cta-button:hover {
+        background-color: #1a2b48;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(26, 43, 72, 0.3);
+    }
+    .hero-right-slideshow {
+        width: 50%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        transform: scale(0.8);
+    }
+    .slide.active {
+        opacity: 1;
+    }
+
+
+    /* カードレイアウト */
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        margin-top: 40px;
+    }
+    .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 40px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        border: 1px solid #e8e8e8;
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+    .recommendation-card .photo { text-align: center; margin-bottom: 20px; }
+    .recommendation-card .photo img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 4px solid #005A9C;
+    }
+    .product-card .image { text-align: center; margin-bottom: 20px; padding: 20px; }
+    .product-card ul { list-style: none; padding: 0; }
+    .product-card ul li {
+        padding-left: 1.5em;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    .product-card ul li::before {
+        content: '✓';
+        color: #005A9C;
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+
+    /* 申し込み・オプションエリア */
+    .subscription-card, .option-intro {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border: 1px solid #e8e8e8;
+        margin: 0 auto;
+        max-width: 700px;
+    }
+    .price { font-size: 2.8rem; font-weight: bold; color: #005A9C; }
+    .price span { font-size: 1rem; font-weight: normal; color: #333; }
+    .base-button-placeholder {
+        background-color: #ff8c00;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-top: 20px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+    .base-button-placeholder:hover {
+        background-color: #e67e00;
+    }
+    .note { font-size: 0.9rem; color: #666; margin-top: 15px; }
+    .option-intro { display: flex; align-items: center; gap: 40px; margin-top: 40px; max-width: 900px; }
+    .option-intro .image { flex: 1; text-align: center; }
+    .option-intro .description { flex: 1; }
+    .option-intro .description h4 { margin-top: 25px; margin-bottom: 5px; }
+    .option-intro .description p { margin-top: 0; }
+
+    /* Q&Aセクション */
+    .qa-section {
+        max-width: 800px;
+        margin: 40px auto 0;
+    }
+    .qa-item {
+        border-bottom: 1px solid #e0e0e0;
+        padding: 20px 0;
+    }
+    .qa-item:last-child {
+        border-bottom: none;
+    }
+    .qa-question {
+        font-weight: bold;
+        color: #005A9C;
+        position: relative;
+        padding-left: 25px;
+    }
+    .qa-question::before {
+        content: 'Q.';
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+    .qa-answer {
+        margin-top: 10px;
+        padding-left: 25px;
+        color: #555;
+    }
+
+    /* フッター */
+    .footer {
+        background-color: #1a2b48;
+        color: #ccc;
+        padding: 60px 20px;
+    }
+    .footer .container { padding: 0 20px; }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        text-align: left;
+    }
+    .footer-col p { margin: 5px 0; font-size: 0.9rem; }
+    .footer-col h4 { color: #fff; margin-bottom: 15px; }
+    .footer-bottom {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #3e4a63;
+        font-size: 0.9rem;
+    }
+    .footer a { color: #fff; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 992px) {
+        .hero-split-container { flex-direction: column; height: auto; }
+        .hero-left, .hero-right-slideshow { width: 100%; text-align: center; }
+        .hero-left { padding: 15vh 5vw; }
+        .hero-left .logo a { margin-left: auto; margin-right: auto; }
+        .hero-right-slideshow { height: 60vh; min-height: 400px; }
+    }
+    @media (max-width: 768px) {
+        .hero-left h1 { font-size: 2rem; }
+        .hero-left .cta-button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .option-intro { flex-direction: column; }
+        .footer-grid { text-align: center; }
+    }
+</style>
+
+</head>
+<body>
+
+<main>
+    <!-- ヒーローセクション -->
+    <section class="hero-split-container" id="top">
+        <div class="hero-left">
+           <img src="https://i.imgur.com/11phHyH.png" alt="有田歯科医院 ロゴ" class="logo">
+            <h1>歯科医療から、<br>睡眠の質を科学する。</h1>
+            <p>有田歯科医院が提供する、次世代の睡眠ケア「synchrowave01」</p>
+            <a href="#subscription" class="cta-button">サブスクリプションプランを確認する</a>
+        </div>
+        <div class="hero-right-slideshow">
+            <div class="slide active" style="background-image: url('https://i.imgur.com/9UuhTlY.png');"></div>
+            <div class="slide" style="background-image: url('https://i.imgur.com/2lLmtyh.jpg');"></div>
+            <div class="slide" style="background-image: url('https://i.imgur.com/EZpl9je.jpg');"></div>
+            <div class="slide" style="background-image: url('https://i.imgur.com/xoXiD4N.png');"></div>
+        </div>
+    </section>
+
+    <!-- 情報カードセクション -->
+    <section id="info-cards" class="section">
+        <div class="container">
+            <div class="card-container">
+                <!-- 院長からのメッセージ -->
+                <div class="card recommendation-card">
+                    <div class="photo">
+                        <img src="https://i.imgur.com/t5xpuMp.png" alt="有田院長">
+                    </div>
+                    <h2 class="text-center">院長からのメッセージ</h2>
+                    <p>「有田歯科医院では、患者様の健康と睡眠の質向上を目指し、包括的な睡眠医療に取り組んでおります。睡眠中の歯ぎしりや食いしばりの筋活動を精密に記録する検査を基盤とした治療を行うとともに、いびき・睡眠時無呼吸症候群の専門外来である東京ロンフェルメ耳鼻いんこう科との連携により、これらの症状にお悩みの患者様に対して専門的な治療を提供してまいりました。さらに、睡眠医学の世界的権威であるクリスチャン・ギルミノー医学博士が立案した睡眠サポートプログラムも導入し、従来にない革新的なアプローチで患者様の良質な睡眠を実現いたします。」</p>
+                </div>
+                <!-- 製品紹介 -->
+                <div id="product" class="card product-card">
+                    <div class="image">
+                        <img src="https://i.imgur.com/9UuhTlY.png" alt="synchrowave01 Vr.2 商品写真">
+                    </div>
+                    <h2 class="text-center">What's synchrowave01?</h2>
+                    <p>シューマン共振を含む超低周波を発振し、深い眠りへと導く最先端のウェアラブルデバイスです。シンプルで洗練されたデザインで、持ち運びにも便利です。</p>
+                    <ul>
+                        <li><strong>超低周波発振器:</strong> シューマン共振を利用し、睡眠環境をサポート</li>
+                        <li><strong>軽量コンパクト:</strong> 56x56x12mm, わずか42gの軽量設計</li>
+                        <li><strong>高品質な日本製:</strong> 徹底した品質管理のもと国内で製造</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サブスクリプション申し込み -->
+    <section id="subscription" class="section" style="background-color: #fff;">
+        <div class="container text-center">
+            <h2 style="font-size: 2rem;">サブスクリプションで始める<br>最先端の睡眠ケア</h2>
+            <div class="subscription-card">
+                <h3 style="font-size: 1.5rem; line-height: 1.5; margin-bottom: 25px;">睡眠医学の権威が立案した<br>睡眠サポートを続ける</h3>
+                <p class="price">¥3,500 <span>/ 月（税込）</span></p>
+                <div class="base-button-placeholder">
+                   <a href="https://vrr1.base.shop/items/112041165" class="base-button-placeholder">
+  定期便プランを申し込む
+</a>
+                </div>
+                <p class="note">※ネットショップBASEでサブスクリプション決済をお願いします。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- オプション品紹介 -->
+    <section id="option" class="section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2rem;">より広く共振波エリアを求める方へ</h2>
+            <div class="option-intro">
+                <div class="image">
+                    <img src="https://i.imgur.com/rbJsriV.png" alt="拡張アンテナ 商品写真">
+                </div>
+                <div class="description">
+                    <h3>拡張アンテナ（オプション品）</h3>
+                     <p class="price" style="font-size: 2.2rem;">¥5,000 <span>（税込・買い切り）</span></p>
+                    <h4>製品仕様</h4>
+                    <p>サイズ：56㎜ × 56㎜ × 12㎜<br>
+                       重量：35g<br>
+                       接続コード：1m / 18g</p>
+                    <h4>商品説明</h4>
+                    <p>共振エリアを2倍に拡張するためのアンテナです</p>
+                    <div class="base-button-placeholder">
+                        <a href="https://vrr1.base.shop/items/112099018" class="base-button-placeholder">
+  通常購入する
+</a>
+
+                    </div>
+                     <p class="note">※本製品はsynchrowave01本体のオプション品です。単体ではご使用になれません。<br>※ネットショップBASEでサブスクリプション決済をお願いします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&Aセクション -->
+    <section id="faq" class="section" style="background-color: #fff;">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 2rem;">よくあるご質問</h2>
+            <div class="qa-section">
+                <div class="qa-item">
+                    <p class="qa-question">デバイスはいつ、どのように受け取れますか？</p>
+                    <p class="qa-answer">A. 決済完了後、有田歯科医院の受付にてデバイスをお渡しします。その際に、専門のスタッフが使用方法を丁寧にご説明いたしますのでご安心ください。</p>
+                </div>
+                <div class="qa-item">
+                    <p class="qa-question">支払い方法について教えてください。</p>
+                    <p class="qa-answer">A. ご契約後、BASEの定期便機能により毎月自動で決済が行われます。</p>
+                </div>
+                <div class="qa-item">
+                    <p class="qa-question">解約はいつでもできますか？</p>
+                    <p class="qa-answer">A. ご契約から6か月経過後は、いつでも解約可能です。解約をご希望の場合は、診療所の受付またはお電話にてお申し付けください。解約月の末日までにデバイスをご返却いただく必要がございます。</p>
+                </div>
+                <div class="qa-item">
+                    <p class="qa-question">お手入れや取り扱いで注意することは？</p>
+                    <p class="qa-answer">A. 使用後は柔らかい布で軽く拭き、清掃してください。水や湿気にさらさないよう注意し、乾燥した場所で保管してください。ご使用前に必ず取扱説明書をお読みください。</p>
+                </div>
+                 <div class="qa-item">
+                    <p class="qa-question">故障した場合の補償はありますか？</p>
+                    <p class="qa-answer">A.故障した場合は直ちに代替品をご用意いたします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- フッター -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>クリニック情報</h4>
+                <p><strong>有田歯科医院</strong></p>
+                <p>〒160-0022<br>東京都新宿区新宿４－４－１<br>サテライト新宿ビル５Ｆ</p>
+                <p>TEL: 03-3341-8294</p>
+            </div>
+            <div class="footer-col">
+                <h4>製造・開発</h4>
+                <p><strong>MDA松尾歯科技術研究所</strong></p>
+                <p>〒272-0024<br>千葉県市川市鬼高2-11-12 504</p>
+                <p>TEL: 050-3701-1346</p>
+                <p>Email: mda.tribo@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>サポート</h4>
+                <!-- ★変更: リンク先をBASE独自タグに置き換え -->
+                <p><a href="{ContactPageURL}">お問い合わせ</a></p>
+                <p><a href="{LawPageURL}">特定商取引法に基づく表記</a></p>
+                <p><a href="{PrivacyPageURL}">プライバシーポリシー</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Arida Dental Clinic & MDA. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ヒーローセクションのスライドショー機能
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.hero-right-slideshow .slide');
+        if (slides.length > 1) {
+            let currentSlide = 0;
+            const slideInterval = 3000;
+            slides[0].classList.add('active');
+
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            setInterval(nextSlide, slideInterval);
+        }
+    });
+</script>
+
+<!-- BASE独自タグ: エラー解消のため、表示に影響しないよう末尾に追加 -->
+<div style="display:none;">
+    {BASEMenuTag}
+    {ContactContentsTag}
+    {PrivacyContentsTag}
+    {LawContentsTag}
+    {ItemAttentionTag}
+    {IllegalReportTag}
+</div>
+
+</body>
+</html>
